@@ -1,5 +1,6 @@
 class Comment < ActiveRecord::Base
   include ActsAsCommentable::Comment
+  serialize :github_payload_hash
 
   belongs_to :commentable, :polymorphic => true
   belongs_to :user

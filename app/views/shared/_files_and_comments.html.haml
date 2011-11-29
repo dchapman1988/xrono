@@ -4,6 +4,7 @@
   %p
   %hr  
   - items.each do |item|
+    =item.class
     - if item.is_a? Comment
       = render :partial => 'comments/comment', :locals => {:comment => item}
     - elsif item.is_a? FileAttachment

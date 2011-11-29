@@ -18,6 +18,7 @@ AssetTrackerTutorial::Application.routes.draw do
     resource :site_settings
   end
   get '/admin', :controller => "admin/base", :action => "index"
+  match '/github', :controller => "api/v1/github", :action => "payload"
 
   resources :clients do
     resources :comments

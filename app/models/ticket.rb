@@ -138,6 +138,6 @@ class Ticket < ActiveRecord::Base
   end
 #### Comment out to look at bug in ticket show page
   def files_and_comments
-    [self.file_attachments, self.comments]
+    [self.file_attachments, self.comments].flatten
   end
 end

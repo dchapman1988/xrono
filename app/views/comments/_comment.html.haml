@@ -9,14 +9,24 @@
             = c.submit "Hide Comment", :class => 'btn'
       .span4
         .comment_real_body
-          = " #{comment.user.first_name} #{comment.user.last_name} commented"
+          = " #{comment.user.first_name} #{comment.user.last_name} #{comment.github_payload_hash.nil? ? "commented" : "pushed"}"
           %p
           = " #{distance_of_time_in_words_to_now(comment.created_at)} ago:"
           %p
           = "#{t(:posted)}: #{comment.created_at.strftime("%m-%d-%y")} at #{comment.created_at.strftime("%I:%M %p")}"
       .span8
         .comment_body
-          %pre= comment.comment
+          -if comment.github_payload_hash
+            .github_payload
+              -comment.github_payload_hash["commits"].each_with_index do |commit, i|
+                -if i > 0
+                  %hr
+                =link_to commit["id"], commit["url"], :target => "_blank"  
+                = " - Add #{commit["added"].count} Rem #{commit["removed"].count} Mod #{commit["modified"].count}"
+                %br
+                =commit["message"]
+          -else
+            %pre= comment.comment
       .span2
         - if comment.user == current_user
           = button_to "Delete", comment, :method => :delete, :confirm => "Are you sure?"
