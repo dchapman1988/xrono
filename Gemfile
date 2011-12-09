@@ -36,14 +36,14 @@ group :production do
 end
 
 group :development do
-  gem 'awesome_print', :require => 'ap'
+  gem 'awesome_print', require: 'ap'
 end
 
 group :test do
   unless ENV['travis']
-    gem 'ruby-debug19', :require => 'ruby-debug'
+    gem 'ruby-debug19', require: 'ruby-debug'
   end
-  gem 'awesome_print', :require => 'ap'
+  gem 'awesome_print', require: 'ap'
   gem 'capybara', '~> 1.1.1'
   gem 'cucumber', '~> 1.0.6'
   gem 'cucumber-rails', '~> 1.0.5'

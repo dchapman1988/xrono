@@ -9,7 +9,7 @@
       %th= t(:hours)            
   %tbody
     - @work_units.each do |work_unit|
-      %tr{ :class => cycle("odd", "even") }
+      %tr{ class: cycle("odd", "even") }
         %td= work_unit.id
         %td= link_to work_unit.description, work_unit_path(work_unit)
         %td= work_unit.user.first_name

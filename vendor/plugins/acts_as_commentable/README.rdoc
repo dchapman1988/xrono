@@ -37,7 +37,7 @@ rake db:migrate
  * Add a comment to a model instance
  
  commentable = Post.create
- commentable.comments.create(:title => "First comment.", :comment => "This is the first comment.")
+ commentable.comments.create(title: "First comment.", comment: "This is the first comment.")
 
  * Fetch comments for a commentable model:
  

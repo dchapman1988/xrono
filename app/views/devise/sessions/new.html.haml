@@ -1,4 +1,4 @@
-= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
   %fieldset
     %legend Sign in
     .login_form
@@ -16,6 +16,6 @@
           .input
             = f.check_box :remember_me
       .actions
-        = f.submit "Sign in", :class => 'btn primary'
+        = f.submit "Sign in", class: 'btn primary'
 
-= render :partial => "devise/shared/links"
+= render partial: "devise/shared/links"

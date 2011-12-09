@@ -1,4 +1,4 @@
-= form_for WorkUnit.new(params[:work_unit]), :url =>  create_in_dashboard_work_units_path() do |f|
+= form_for WorkUnit.new(params[:work_unit]), url:  create_in_dashboard_work_units_path() do |f|
   %fieldset
     %legend= t(:add_work_unit)
 
@@ -9,13 +9,13 @@
         %ul.inputs-list
           %li
             %label
-              %input{:id => "checkbox", :type => "checkbox", :name => "checkbox", :value => true, :checked => false}
+              %input{id: "checkbox", type: "checkbox", name: "checkbox", value: true, checked: false}
               %span Show hidden clients and projects
 
     .clearfix
       %label= "#{t(:scheduled_on)}:"
       .input
-        = link_to Date.current, "#", :id => "schedule_modal_link"
+        = link_to Date.current, "#", id: "schedule_modal_link"
 
     #schedule_modal
       %p= t(:enter_work_units_on_completion_day)
@@ -25,35 +25,35 @@
           = text_field_tag :scheduled_at, Date.current
 
     .clearfix
-      %label{:for => "work_unit_client_id"}= "#{t(:client)}:"
+      %label{for: "work_unit_client_id"}= "#{t(:client)}:"
       .input
-        = collection_select("work_unit", "client_id", @clients, "id", "name", { :prompt => t(:select_a_client) }, :class => 'chzn-select')
+        = collection_select("work_unit", "client_id", @clients, "id", "name", { prompt: t(:select_a_client) }, class: 'chzn-select')
 
     .clearfix
-      %label{:for => "work_unit_project_id"}= "#{t(:project)}:"
+      %label{for: "work_unit_project_id"}= "#{t(:project)}:"
       .input
-        = collection_select("work_unit", "project_id", @projects, "id", "name", { :prompt => t(:select_a_project) }, :class => 'chzn-select')
+        = collection_select("work_unit", "project_id", @projects, "id", "name", { prompt: t(:select_a_project) }, class: 'chzn-select')
 
     .clearfix
-      %label{:for => "work_unit_ticket_id"}= "#{t(:ticket)}:"
+      %label{for: "work_unit_ticket_id"}= "#{t(:ticket)}:"
       .input
-        = collection_select("work_unit", "ticket_id", @tickets, "id", "name", { :prompt => t(:select_a_ticket) }, :class => 'chzn-select')
+        = collection_select("work_unit", "ticket_id", @tickets, "id", "name", { prompt: t(:select_a_ticket) }, class: 'chzn-select')
 
     .clearfix
-      %label{:for => "work_unit_hours_type"}= "#{t(:type)}:"
+      %label{for: "work_unit_hours_type"}= "#{t(:type)}:"
       .input
-        = select_tag("hours_type", options_for_select(['Normal', 'Overtime', 'CTO', 'PTO']), :class => 'chzn-select')
+        = select_tag("hours_type", options_for_select(['Normal', 'Overtime', 'CTO', 'PTO']), class: 'chzn-select')
 
     .clearfix
-      %label{:for => "work_unit_hours"}= "#{t(:hours).capitalize}:"
+      %label{for: "work_unit_hours"}= "#{t(:hours).capitalize}:"
       .input
-        = f.text_field :hours, { :size => 10 }
+        = f.text_field :hours, { size: 10 }
 
     .clearfix
-      %label{:for => "work_unit_description"}= "#{t(:description)}:"
+      %label{for: "work_unit_description"}= "#{t(:description)}:"
       .input
-        = f.text_area :description, { :rows => 5 }
+        = f.text_area :description, { rows: 5 }
 
     .actions
-      = f.hidden_field :scheduled_at, :value => Date.current
-      = f.submit t(:create_work_unit), :class => 'add_new_button btn primary'
+      = f.hidden_field :scheduled_at, value: Date.current
+      = f.submit t(:create_work_unit), class: 'add_new_button btn primary'

@@ -27,7 +27,7 @@ module ApplicationHelper
       label_type = 'warning'
     end
     if label_type
-      haml_tag(:div, :class => 'label ' << label_type) do
+      haml_tag(:div, class: 'label ' << label_type) do
         haml_concat hour_type
       end
     end

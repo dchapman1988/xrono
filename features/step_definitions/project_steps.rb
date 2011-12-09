@@ -3,19 +3,19 @@ Given /^I am assigned to the project$/ do
 end
 
 Given /^the following projects:$/ do |projects|
-  client = Client.create(:name => 'test', :status => 'test')
+  client = Client.create(name: 'test', status: 'test')
   projects.hashes.each do |hash|
-    Project.create(hash.merge(:client_id => client.id))
+    Project.create(hash.merge(client_id: client.id))
   end
 end
 
 When /^I visit the projects index page for a given client$/ do
-  client = Client.create(:name => 'test', :status => 'test')
+  client = Client.create(name: 'test', status: 'test')
   visit projects_path
 end
 
 When /^(?:|I )visit the new project page for a given client$/ do
-  client = Client.create(:name => 'test', :status => 'test')
+  client = Client.create(name: 'test', status: 'test')
   visit new_client_project_path(client)
 end
 

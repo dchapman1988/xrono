@@ -39,10 +39,10 @@ SimpleNavigation::Configuration.run do |navigation|
     # options - can be used to specify attributes that will be included in the rendered navigation item (e.g. id, class etc.)
     #           some special options that can be set:
     #           :if - Specifies a proc to call to determine if the item should
-    #                 be rendered (e.g. <tt>:if => Proc.new { current_user.admin? }</tt>). The
+    #                 be rendered (e.g. <tt>if: Proc.new { current_user.admin? }</tt>). The
     #                 proc should evaluate to a true or false value and is evaluated in the context of the view.
     #           :unless - Specifies a proc to call to determine if the item should not
-    #                     be rendered (e.g. <tt>:unless => Proc.new { current_user.admin? }</tt>). The
+    #                     be rendered (e.g. <tt>unless: Proc.new { current_user.admin? }</tt>). The
     #                     proc should evaluate to a true or false value and is evaluated in the context of the view.
     #           :method - Specifies the http-method for the generated link - default is :get.
     #           :highlights_on - if autohighlighting is turned off and/or you want to explicitly specify
@@ -51,9 +51,9 @@ SimpleNavigation::Configuration.run do |navigation|
     #
     primary.item :home, t(:home), root_path
     primary.item :clients, t(:clients), clients_path
-    primary.item :admin_users, t(:users), admin_users_path, :if => lambda{ admin? }, :highlights_on => lambda{ false }
-    primary.item :admin, t(:admin), admin_path, :if => lambda{ admin? }, :highlights_on => /admin/
-    primary.item :users, t(:users), users_path, :unless => lambda{ admin? }
+    primary.item :admin_users, t(:users), admin_users_path, if: lambda{ admin? }, highlights_on: lambda{ false }
+    primary.item :admin, t(:admin), admin_path, if: lambda{ admin? }, highlights_on: /admin/
+    primary.item :users, t(:users), users_path, unless: lambda{ admin? }
 
     primary.dom_class = 'nav'
 

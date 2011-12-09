@@ -2,21 +2,21 @@
 - comment_num = comment_num.to_s
 .comment-section
 
-%div{ :id => "comment-form-#{comment_num}", :class => "comment-form hidden", :style => "display: none" }
+%div{ id: "comment-form-#{comment_num}", class: "comment-form hidden", style: "display: none" }
   .module
-    = form_for Comment.new, :as => :comment, :url => comments_path do |f|
+    = form_for Comment.new, as: :comment, url: comments_path do |f|
       %fieldset
         .clearfix
           = f.label :comment
           .input
-            = f.text_area :comment, :rows => 5, :class => 'xxlarge'
+            = f.text_area :comment, rows: 5, class: 'xxlarge'
         = hidden_field_tag commentable_field, commentable_id
         = hidden_field_tag :refurl, refurl
         = hidden_field_tag :commentable_type, commentable_type
         .actions
-          = submit_tag t(:post_comment), :class => 'btn primary'
+          = submit_tag t(:post_comment), class: 'btn primary'
 
-= link_to t(:add_comment), "#", :id => "link-to-show-comment-#{comment_num}"
+= link_to t(:add_comment), "#", id: "link-to-show-comment-#{comment_num}"
 
 - content_for :javascripts do
   :javascript

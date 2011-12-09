@@ -1,7 +1,7 @@
 .module
   %h2= t(:add_file_attachment)
 
-  = form_for :file_attachment, :url => file_attachments_path, :html => { :multipart => true } do |form|
+  = form_for :file_attachment, url: file_attachments_path, html: { multipart: true } do |form|
     %fieldset
       .clearfix
         %label File
@@ -14,4 +14,4 @@
       - if params[:project_id]
         = hidden_field_tag :project_id, params[:project_id]
       .actions
-        = form.submit t(:submit), :class => 'btn primary'
+        = form.submit t(:submit), class: 'btn primary'

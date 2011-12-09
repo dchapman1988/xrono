@@ -10,7 +10,7 @@
 .clearfix
   %label= "#{t(:scheduled_on)}:"
   .input
-    = link_to @work_unit.scheduled_at.to_date, "#", :id => "schedule_modal_link"
+    = link_to @work_unit.scheduled_at.to_date, "#", id: "schedule_modal_link"
 
 #schedule_modal
   %p= t(:enter_work_units_on_completion_day)
@@ -32,9 +32,9 @@
 .clearfix
   = f.label :description
   .input
-    = f.text_area :description, :class => 'xxlarge', :rows => 5
+    = f.text_area :description, class: 'xxlarge', rows: 5
 
 .actions
   = f.hidden_field :scheduled_at, value: Date.current
   = f.hidden_field :ticket_id, value: @work_unit.ticket.id
-  = f.submit :class => 'btn primary'
+  = f.submit class: 'btn primary'

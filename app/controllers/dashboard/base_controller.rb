@@ -1,6 +1,6 @@
 class Dashboard::BaseController < ApplicationController
   include ActionView::Helpers::SanitizeHelper
-  before_filter :get_calendar_details, :only => [:index, :calendar, :update_calendar]
+  before_filter :get_calendar_details, only: [:index, :calendar, :update_calendar]
   respond_to :html, :json, :js
 
   ##############################################################################
@@ -13,19 +13,19 @@ class Dashboard::BaseController < ApplicationController
     @clients = Client.not_inactive.sort_by_name
     @projects = []
     @tickets = []
-    render :json => @clients
+    render json: @clients
   end
 
   # Show ALL projects                                                          #
   def collaborative_client
-    @projects = Project.find(:all, :conditions => {:client_id => params[:id]}, :order => "name")
-    render :json => @projects
+    @projects = Project.find(:all, conditions: {client_id: params[:id]}, order: "name")
+    render json: @projects
   end
   
   # Show ALL tickets                                                           #
   def collaborative_project
-    @tickets = Ticket.find(:all, :conditions => {:project_id => params[:id]}, :order => "name")
-    render :json => @tickets
+    @tickets = Ticket.find(:all, conditions: {project_id: params[:id]}, order: "name")
+    render json: @tickets
   end
 
   # Undoes effects of checkbox, rendering only the clients for which developer #
@@ -34,7 +34,7 @@ class Dashboard::BaseController < ApplicationController
     @clients = Client.not_inactive.sort_by_name.for_user(current_user)
     @projects = []
     @tickets = []
-    render :json => @clients
+    render json: @clients
   end
   
   ##############################################################################
@@ -43,8 +43,8 @@ class Dashboard::BaseController < ApplicationController
   def index
     if current_user.has_role?(:developer) && !admin?
       unless current_user.work_units_for_day(Date.current.prev_working_day).any?
-        @message = {:title => t(:management),
-          :body => t(:enter_time_for_previous_day)}
+        @message = {title: t(:management),
+          body: t(:enter_time_for_previous_day)}
       end
     end
     @clients = Client.not_inactive.sort_by_name.for_user(current_user)
@@ -61,7 +61,7 @@ class Dashboard::BaseController < ApplicationController
   end
 
   def project
-    @tickets = Ticket.find(:all, :conditions => {:project_id => params[:id]}, :order => "name")
+    @tickets = Ticket.find(:all, conditions: {project_id: params[:id]}, order: "name")
     #unless admin?
      # @tickets = @tickets.for_user_and_role(current_user, :developer)
     #end
@@ -70,7 +70,7 @@ class Dashboard::BaseController < ApplicationController
 
   # GET /projects/show_me_the_tickets
   def give_me_the_tickets
-    render :partial => "shared/ticketboard", :locals => { :project => Project.find(params[:id]) }
+    render partial: "shared/ticketboard", locals: { project: Project.find(params[:id]) }
   end
 
   def calendar
@@ -79,19 +79,19 @@ class Dashboard::BaseController < ApplicationController
   def update_calendar
     respond_to do |format|
       format.js {
-        render :json => {
-          :success => true,
-          :data => render_to_string(
-            :partial => 'shared/calendar',
-            :locals => {
-              :start_date => @start_date,
-              :user => current_user
+        render json: {
+          success: true,
+          data: render_to_string(
+            partial: 'shared/calendar',
+            locals: {
+              start_date: @start_date,
+              user: current_user
             }
           ),
-          :week_pagination => render_to_string(
-            :partial => 'dashboard/base/week_pagination',
-            :locals => {
-              :start_date => @start_date
+          week_pagination: render_to_string(
+            partial: 'dashboard/base/week_pagination',
+            locals: {
+              start_date: @start_date
             }
           )
         }

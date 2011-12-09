@@ -6,7 +6,7 @@ module GuidReferenced
       validates_uniqueness_of :guid
       validates_presence_of :guid
 
-      before_validation :generate_guid, :on => :create
+      before_validation :generate_guid, on: :create
     end
   end
 

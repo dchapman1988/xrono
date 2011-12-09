@@ -1,12 +1,12 @@
 %h2= t(:site_settings)
 
-= render :partial => 'admin/nav'
+= render partial: 'admin/nav'
 
 = t(:current_site_logo)
 = image_tag @site_settings.site_logo.url
-= button_to(t(:remove_site_logo), admin_site_settings_path, :method => :delete, :confirm => 'Are you sure?', :class => 'btn')
+= button_to(t(:remove_site_logo), admin_site_settings_path, method: :delete, confirm: 'Are you sure?', class: 'btn')
 
-= form_for @site_settings, :as => :admin_site_settings, :url => { :action => "update" }, :html => { :method => "put", :multipart => true } do |f|
+= form_for @site_settings, as: :admin_site_settings, url: { action: "update" }, html: { method: "put", multipart: true } do |f|
   %fieldset
     .clearfix
       = f.label :site_logo
@@ -23,7 +23,7 @@
     .clearfix
       = f.label :internal_client
       .input
-        = f.collection_select(:client_id, Client.all, :id, :to_s, :prompt => true)
+        = f.collection_select(:client_id, Client.all, :id, :to_s, prompt: true)
     .actions
-      = f.submit 'Update', :class => 'add_new_button btn primary'
-      = link_to 'Cancel', admin_path, :class => 'cancel_button btn'
+      = f.submit 'Update', class: 'add_new_button btn primary'
+      = link_to 'Cancel', admin_path, class: 'cancel_button btn'

@@ -3,7 +3,7 @@
   #effect.effect
   #ticketboard.ticketboard
     - Ticket.state_machine.states.keys.each do |state|
-      = render :partial => "shared/ticketflow", :locals => { :project => project, :state => state }
+      = render partial: "shared/ticketflow", locals: { project: project, state: state }
   .clearfix
 
 - content_for :javascripts do

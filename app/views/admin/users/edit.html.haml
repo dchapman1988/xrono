@@ -1,7 +1,7 @@
 .module
   %h2= t(:edit_user)
 
-  = form_for @user, :class => "new_user", :url => admin_user_path(@user) do |f|
+  = form_for @user, class: "new_user", url: admin_user_path(@user) do |f|
     .clearfix
       = f.label :first_name
       .input
@@ -38,7 +38,7 @@
               = f.check_box :locked
               %span Locked
     .actions
-      = f.submit 'Update', :class => 'add_new_button btn primary'
-      = link_to 'Cancel', admin_users_path, :class => 'cancel_button btn'
+      = f.submit 'Update', class: 'add_new_button btn primary'
+      = link_to 'Cancel', admin_users_path, class: 'cancel_button btn'
 
   .clear

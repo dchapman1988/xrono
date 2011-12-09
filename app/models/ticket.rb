@@ -1,7 +1,7 @@
 class Ticket < ActiveRecord::Base
   include GuidReferenced
   acts_as_commentable
-  acts_as_audited :only => [:state]
+  acts_as_audited only: [:state]
   belongs_to :project
   has_many :work_units
   has_many :file_attachments
@@ -9,11 +9,11 @@ class Ticket < ActiveRecord::Base
   validates_presence_of :project_id
   validates_presence_of :name
 
-  scope :for_client,     lambda{|client|     joins({:project => [:client]}).where("clients.id = ?", client.id) }
-  scope :for_project,    lambda{|project|    where(:project_id => project.id) }
-  scope :for_project_id, lambda{|project_id| where :project_id => project_id }
+  scope :for_client,     lambda{|client|     joins({project: [:client]}).where("clients.id = ?", client.id) }
+  scope :for_project,    lambda{|project|    where(project_id: project.id) }
+  scope :for_project_id, lambda{|project_id| where project_id: project_id }
   scope :sort_by_name,   order('name ASC')
-  scope :for_state, lambda { |state| where(:state => state) }
+  scope :for_state, lambda { |state| where(state: state) }
 
   scope :for_user, lambda{|user|
     joins("INNER JOIN projects     p ON p.id=tickets.project_id")
@@ -29,7 +29,7 @@ class Ticket < ActiveRecord::Base
    .where("ru.user_id = #{user.id} AND r.name = '#{role}'")
   }
 
-  state_machine :state, :initial => :fridge do
+  state_machine :state, initial: :fridge do
     after_transition do |ticket|
       ticket.send_email!
     end
@@ -74,15 +74,15 @@ class Ticket < ActiveRecord::Base
     end
 
     event :move_to_peer_review do
-      transition :development => :peer_review
+      transition development: :peer_review
     end
 
     event :move_to_user_acceptance do
-      transition :peer_review => :user_acceptance
+      transition peer_review: :user_acceptance
     end
 
     event :move_to_archived do
-      transition :user_acceptance => :archived
+      transition user_acceptance: :archived
     end
   end
 

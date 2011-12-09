@@ -1,6 +1,6 @@
 class Admin::UsersController < Admin::BaseController
-  before_filter :load_user_account, :only => [:update, :edit, :destroy, :projects]
-  before_filter :load_new_user_account, :only => [:new, :create]
+  before_filter :load_user_account, only: [:update, :edit, :destroy, :projects]
+  before_filter :load_new_user_account, only: [:new, :create]
 
   def index
     @users = {unlocked: User.unlocked.sort_by_name, locked: User.locked.sort_by_name}

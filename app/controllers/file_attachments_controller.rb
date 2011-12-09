@@ -1,7 +1,7 @@
 class FileAttachmentsController < ApplicationController
-  before_filter :load_new_file_attachment, :only => [:new, :create]
-  before_filter :load_file_attachment, :only => [:show, :mark_as_invalid]
-  before_filter :get_referrer, :only => [:create]
+  before_filter :load_new_file_attachment, only: [:new, :create]
+  before_filter :load_file_attachment, only: [:show, :mark_as_invalid]
+  before_filter :get_referrer, only: [:create]
 
   protected
   def load_new_file_attachment
@@ -32,7 +32,7 @@ class FileAttachmentsController < ApplicationController
 
   public
   def show
-    send_file(@file_attachment.attachment_file.path, :disposition => 'attachment')
+    send_file(@file_attachment.attachment_file.path, disposition: 'attachment')
   end
 
   def new
@@ -54,7 +54,7 @@ class FileAttachmentsController < ApplicationController
       redirect_to @referrer_path
     else
       flash.now[:error] = t(:file_attachment_created_unsuccessfully)
-      render :action => :new
+      render action: :new
     end
   end
 end

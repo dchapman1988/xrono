@@ -2,14 +2,14 @@ class Client < ActiveRecord::Base
   include GuidReferenced
   acts_as_commentable
   has_many :projects
-  has_many :tickets, :through => :projects
-  has_many :comments, :as => :commentable
+  has_many :tickets, through: :projects
+  has_many :comments, as: :commentable
   has_many :file_attachments
   has_many :contacts
   has_one  :site_settings
 
   validates_presence_of   :name, :status
-  validates_uniqueness_of :name, :allow_nil => false
+  validates_uniqueness_of :name, allow_nil: false
 
   scope :sort_by_name, order('name ASC')
   scope :not_inactive, where('status = "10" OR status = "20"')

@@ -5,7 +5,7 @@
         - (0..6).map{|x| start_date + x.days }.each do |date|
           %th= "#{date.asctime[0]} - #{date.day}"
         %th
-          = link_to '[+/-]', '#', :class => 'expand'
+          = link_to '[+/-]', '#', class: 'expand'
           = "#{t(:totals)}:"
     %tfoot
       %tr.calendar_foot
@@ -19,9 +19,9 @@
             - unless user.work_units_for_day(date).empty?
               %ul.unstyled
                 - user.work_units_for_day(date).each do |work_unit|
-                  %li{:class => "work_unit " << work_unit.hours_type.downcase }
+                  %li{class: "work_unit " << work_unit.hours_type.downcase }
                     - render_label_for(work_unit.hours_type)
-                    = link_to "#{work_unit.client.initials}: #{work_unit.effective_hours}", work_unit_path(work_unit), { :title => work_unit.description, :rel => 'twipsy' }
+                    = link_to "#{work_unit.client.initials}: #{work_unit.effective_hours}", work_unit_path(work_unit), { title: work_unit.description, rel: 'twipsy' }
                     %span.description= '- ' + work_unit.description
 
         %td.span2

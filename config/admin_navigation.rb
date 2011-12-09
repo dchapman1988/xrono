@@ -39,10 +39,10 @@ SimpleNavigation::Configuration.run do |navigation|
     # options - can be used to specify attributes that will be included in the rendered navigation item (e.g. id, class etc.)
     #           some special options that can be set:
     #           :if - Specifies a proc to call to determine if the item should
-    #                 be rendered (e.g. <tt>:if => Proc.new { current_user.admin? }</tt>). The
+    #                 be rendered (e.g. <tt>if: Proc.new { current_user.admin? }</tt>). The
     #                 proc should evaluate to a true or false value and is evaluated in the context of the view.
     #           :unless - Specifies a proc to call to determine if the item should not
-    #                     be rendered (e.g. <tt>:unless => Proc.new { current_user.admin? }</tt>). The
+    #                     be rendered (e.g. <tt>unless: Proc.new { current_user.admin? }</tt>). The
     #                     proc should evaluate to a true or false value and is evaluated in the context of the view.
     #           :method - Specifies the http-method for the generated link - default is :get.
     #           :highlights_on - if autohighlighting is turned off and/or you want to explicitly specify
@@ -51,8 +51,8 @@ SimpleNavigation::Configuration.run do |navigation|
     #
     primary.item :invoice, t(:invoice), admin_invoices_path
     primary.item :payroll, t(:payroll), admin_payroll_index_path
-    #primary.item :unentered_time_report, t(:unentered_time_report), admin_unentered_time_report_index_path, :highlights_on => /unentered_time_report/
-    #primary.item :weekly_time_report, t(:weekly_time_report), admin_weekly_time_report_index_path, :highlights_on => /weekly_time_report/
+    #primary.item :unentered_time_report, t(:unentered_time_report), admin_unentered_time_report_index_path, highlights_on: /unentered_time_report/
+    #primary.item :weekly_time_report, t(:weekly_time_report), admin_weekly_time_report_index_path, highlights_on: /weekly_time_report/
     primary.item :reports, t(:reports), admin_reports_path
     primary.item :users, t(:users), admin_users_path
     primary.item :site_settings, t(:site_settings), edit_admin_site_settings_path

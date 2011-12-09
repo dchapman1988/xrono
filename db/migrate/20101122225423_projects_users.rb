@@ -1,6 +1,6 @@
 class ProjectsUsers < ActiveRecord::Migration
   def self.up
-    create_table :projects_users, :id => false do |t|
+    create_table :projects_users, id: false do |t|
       t.references :project, :user
     end
   end

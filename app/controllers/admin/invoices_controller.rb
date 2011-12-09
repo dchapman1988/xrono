@@ -1,7 +1,7 @@
 class Admin::InvoicesController < ApplicationController
-  before_filter :load_unpaid_work_units, :only => [:index]
-  before_filter :load_client, :only => [:show]
-  before_filter :load_unpaid_work_units_for_client, :only => [:show]
+  before_filter :load_unpaid_work_units, only: [:index]
+  before_filter :load_client, only: [:show]
+  before_filter :load_unpaid_work_units_for_client, only: [:show]
 
   def index
     @clients = Client.for(@work_units)

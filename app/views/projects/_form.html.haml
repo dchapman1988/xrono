@@ -20,5 +20,5 @@
         = f.text_field :overtime_multiplier
     = hidden_field_tag :client, @project.client.id
     .actions
-      = f.submit :class => "add_new_button btn primary"
-      = link_to t(:cancel), client_path(@project.client), :class => 'btn'
+      = f.submit class: "add_new_button btn primary"
+      = link_to t(:cancel), client_path(@project.client), class: 'btn'

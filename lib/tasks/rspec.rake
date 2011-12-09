@@ -32,11 +32,11 @@ spec_prereq = File.exist?(File.join(Rails.root, 'config', 'database.yml')) ? "db
 task :noop do
 end
 
-task :default => :spec
-task :stats => "spec:statsetup"
+task default: :spec
+task stats: "spec:statsetup"
 
 desc "Run all specs in spec directory (excluding plugin specs)"
-Rspec::Core::RakeTask.new(:spec => spec_prereq)
+Rspec::Core::RakeTask.new(spec: spec_prereq)
 
 namespace :spec do
   [:requests, :models, :controllers, :views, :helpers, :mailers, :lib].each do |sub|

@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   layout 'application'
   helper_method :redirect_to_ref_url, :admin?
-  rescue_from 'Acl9::AccessDenied', :with => :access_denied
+  rescue_from 'Acl9::AccessDenied', with: :access_denied
 
   def build_week_hash_for(date, hash={})
     until date.saturday?
@@ -42,6 +42,6 @@ class ApplicationController < ActionController::Base
   end
 
   def initialize_site_settings
-    @site_settings = SiteSettings.first ? SiteSettings.first : SiteSettings.create(:total_yearly_pto_per_user => 40, :overtime_multiplier => 1.5)
+    @site_settings = SiteSettings.first ? SiteSettings.first : SiteSettings.create(total_yearly_pto_per_user: 40, overtime_multiplier: 1.5)
   end
 end

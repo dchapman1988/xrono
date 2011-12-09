@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Ticket do
-  before { @ticket = Ticket.make(:name => 'New Ticket') }
+  before { @ticket = Ticket.make(name: 'New Ticket') }
 
   it { should belong_to :project }
   it { should have_many :work_units }

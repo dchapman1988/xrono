@@ -35,8 +35,8 @@ describe WorkUnit do
     subject { WorkUnit.unpaid }
 
     before do
-      work_unit1.update_attributes(:paid => 'Paid', :paid_at => Date.current)
-      work_unit2.update_attributes(:paid => nil, :paid_at => nil)
+      work_unit1.update_attributes(paid: 'Paid', paid_at: Date.current)
+      work_unit2.update_attributes(paid: nil, paid_at: nil)
     end
 
     it 'should return a collection of work units which are unpaid' do
@@ -48,8 +48,8 @@ describe WorkUnit do
     subject { WorkUnit.not_invoiced }
 
     before do
-      work_unit1.update_attributes(:invoiced => 'Invoiced', :invoiced_at => Date.current)
-      work_unit2.update_attributes(:invoiced => nil, :invoiced_at => nil)
+      work_unit1.update_attributes(invoiced: 'Invoiced', invoiced_at: Date.current)
+      work_unit2.update_attributes(invoiced: nil, invoiced_at: nil)
     end
 
     it 'should return a collection of work units which are not invoiced' do
@@ -219,8 +219,8 @@ describe WorkUnit do
 
   describe '#send_email!' do
     context 'when there are contacts for the parent client who receive email' do
-      let(:contact1) { Contact.make(:client => work_unit.client) }
-      let(:contact2) { Contact.make(:client => work_unit.client) }
+      let(:contact1) { Contact.make(client: work_unit.client) }
+      let(:contact2) { Contact.make(client: work_unit.client) }
 
       before do
         contact1.update_attribute(:receives_email, true)
@@ -246,8 +246,8 @@ describe WorkUnit do
     subject { work_unit.email_list }
 
     context 'when there are contacts for the parent client who receive email' do
-      let(:contact1) { Contact.make(:client => work_unit.client) }
-      let(:contact2) { Contact.make(:client => work_unit.client) }
+      let(:contact1) { Contact.make(client: work_unit.client) }
+      let(:contact2) { Contact.make(client: work_unit.client) }
 
       before do
         contact1.update_attribute(:receives_email, true)
@@ -280,12 +280,12 @@ describe WorkUnit do
     subject { work_unit.unpaid? }
 
     context 'when the work unit is unpaid' do
-      before { work_unit.update_attributes(:paid => nil, :paid_at => nil) }
+      before { work_unit.update_attributes(paid: nil, paid_at: nil) }
       it { should be_true }
     end
 
     context 'when the work unit is paid' do
-      before { work_unit.update_attributes(:paid => 'Paid', :paid_at => Date.current) }
+      before { work_unit.update_attributes(paid: 'Paid', paid_at: Date.current) }
       it { should be_false }
     end
   end
@@ -294,12 +294,12 @@ describe WorkUnit do
     subject { work_unit.paid? }
 
     context 'when the work unit is unpaid' do
-      before { work_unit.update_attributes(:paid => nil, :paid_at => nil) }
+      before { work_unit.update_attributes(paid: nil, paid_at: nil) }
       it { should be_false }
     end
 
     context 'when the work unit is paid' do
-      before { work_unit.update_attributes(:paid => 'Paid', :paid_at => Date.current) }
+      before { work_unit.update_attributes(paid: 'Paid', paid_at: Date.current) }
       it { should be_true }
     end
   end
@@ -308,12 +308,12 @@ describe WorkUnit do
     subject { work_unit.invoiced? }
 
     context 'when the work unit is invoiced' do
-      before { work_unit.update_attributes(:invoiced => 'Invoiced', :invoiced_at => Date.current) }
+      before { work_unit.update_attributes(invoiced: 'Invoiced', invoiced_at: Date.current) }
       it { should be_true }
     end
 
     context 'when the work unit is not invoiced' do
-      before { work_unit.update_attributes(:invoiced => nil, :invoiced_at => nil) }
+      before { work_unit.update_attributes(invoiced: nil, invoiced_at: nil) }
       it { should be_false }
     end
   end
@@ -322,12 +322,12 @@ describe WorkUnit do
     subject { work_unit.not_invoiced? }
 
     context 'when the work unit is invoiced' do
-      before { work_unit.update_attributes(:invoiced => 'Invoiced', :invoiced_at => Date.current) }
+      before { work_unit.update_attributes(invoiced: 'Invoiced', invoiced_at: Date.current) }
       it { should be_false }
     end
 
     context 'when the work unit is not invoiced' do
-      before { work_unit.update_attributes(:invoiced => nil, :invoiced_at => nil) }
+      before { work_unit.update_attributes(invoiced: nil, invoiced_at: nil) }
       it { should be_true }
     end
   end
@@ -423,7 +423,7 @@ describe WorkUnit do
     context 'when saving an overtime work unit' do
       before do
         work_unit.project.update_attribute(:overtime_multiplier, 1.5)
-        work_unit.update_attributes(:hours => 2, :hours_type => 'Overtime')
+        work_unit.update_attributes(hours: 2, hours_type: 'Overtime')
       end
 
       it 'applies the overtime_multiplier' do
@@ -434,7 +434,7 @@ describe WorkUnit do
     context 'when saving a normal work_unit' do
       before do
         work_unit.project.update_attribute(:overtime_multiplier, 1.5)
-        work_unit.update_attributes(:hours => 2, :hours_type => 'Normal')
+        work_unit.update_attributes(hours: 2, hours_type: 'Normal')
       end
 
       it 'does not apply the overtime multiplier' do

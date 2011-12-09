@@ -1,7 +1,7 @@
 class ContactsController < ApplicationController
   before_filter :load_client
-  before_filter :load_contact, :only => [:show, :edit, :update, :destroy]
-  before_filter :require_admin, :only => [:destroy]
+  before_filter :load_contact, only: [:show, :edit, :update, :destroy]
+  before_filter :require_admin, only: [:destroy]
 
   protected
   def load_client
@@ -33,7 +33,7 @@ class ContactsController < ApplicationController
       redirect_to client_contact_path(@contact.client, @contact)
     else
       flash.now[:error] = "There was a problem saving the new contact."
-      render :action => 'new'
+      render action: 'new'
     end
   end
 
@@ -44,7 +44,7 @@ class ContactsController < ApplicationController
       redirect_to client_contact_path
     else
       flash.now[:error] = "There was a problem saving the contact."
-      render :action => 'edit'
+      render action: 'edit'
     end
   end
 
@@ -58,7 +58,7 @@ class ContactsController < ApplicationController
       redirect_to client_contacts_path
     else
       flash.now[:error] = "There was a problem deleting the contact."
-      render :action => 'show'
+      render action: 'show'
     end
   end
 

@@ -26,8 +26,8 @@
       .input
         = f.text_field :overtime_multiplier
     .actions
-      = f.submit :class => "add_new_button btn primary"
+      = f.submit class: "add_new_button btn primary"
       - if @client.new_record?
-        = link_to t(:cancel), clients_path, :class => "cancel_button btn"
+        = link_to t(:cancel), clients_path, class: "cancel_button btn"
       - else
-        = link_to t(:cancel), client_path(@client), :class => "cancel_button btn"
+        = link_to t(:cancel), client_path(@client), class: "cancel_button btn"

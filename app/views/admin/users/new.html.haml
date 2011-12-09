@@ -1,5 +1,5 @@
 .module
-  = form_for @user, :class => "new_user", :url => admin_users_path do |f|
+  = form_for @user, class: "new_user", url: admin_users_path do |f|
     %fieldset
       %legend= t(:new_user)
       .clearfix
@@ -27,6 +27,6 @@
         .input
           = f.password_field :password_confirmation
       .actions
-        = f.submit t(:create), :class => 'add_new_button btn primary'
+        = f.submit t(:create), class: 'add_new_button btn primary'
 
-        = link_to t(:cancel), admin_users_path, :class => 'cancel_button btn'
+        = link_to t(:cancel), admin_users_path, class: 'cancel_button btn'

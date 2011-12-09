@@ -1,6 +1,6 @@
 class AddMissingFieldsToWorkUnits < ActiveRecord::Migration
   def self.up
-    add_column :work_units, :hours, :decimal, :precision => 10, :scale => 2
+    add_column :work_units, :hours, :decimal, precision: 10, scale: 2
     add_column :work_units, :overtime, :boolean
     add_column :work_units, :scheduled_at, :datetime
   end

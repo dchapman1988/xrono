@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   gravtastic
   is_gravtastic!
 
-  acts_as_authorization_subject :association_name => :roles, :join_table_name => :roles_users
+  acts_as_authorization_subject association_name: :roles, join_table_name: :roles_users
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
                   :daily_target_hours, :expanded_calendar
 
   validates_presence_of :first_name, :last_name
-  validates_length_of :middle_initial, :is => 1
+  validates_length_of :middle_initial, is: 1
 
   has_many :work_units
   has_many :comments

@@ -11,7 +11,7 @@ module Juixe
 
       module ClassMethods
         def acts_as_commentable(options={})
-          has_many :comments, {:as => :commentable, :dependent => :destroy}.merge(options)
+          has_many :comments, {as: :commentable, dependent: :destroy}.merge(options)
           include Juixe::Acts::Commentable::InstanceMethods
           extend Juixe::Acts::Commentable::SingletonMethods
         end

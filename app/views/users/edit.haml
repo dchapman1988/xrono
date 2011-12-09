@@ -29,8 +29,8 @@
             .input
               = u.text_field(:daily_target_hours)
           .actions
-            = u.submit t(:update), :class => 'btn primary'
+            = u.submit t(:update), class: 'btn primary'
 
   .span8
     .module
-      = render :partial => "change_password_form", :locals => {:user => @user}
+      = render partial: "change_password_form", locals: {user: @user}

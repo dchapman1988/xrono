@@ -1,4 +1,4 @@
-= render :partial => 'user_head', :locals => { :user => @user }
+= render partial: 'user_head', locals: { user: @user }
 
 %ul.pills
   %li= link_to t(:historical_time_report), historical_time_user_path
@@ -9,5 +9,5 @@
   - if @user.locked_at?
     = t(:user_is_locked)
 .clear    
-= render :partial => 'shared/calendar', :locals => { :start_date => Date.current.beginning_of_week, :user => @user }
-= render :partial => 'shared/calendar', :locals => { :start_date => Date.current.advance({:weeks => -1}).beginning_of_week, :user => @user }
+= render partial: 'shared/calendar', locals: { start_date: Date.current.beginning_of_week, user: @user }
+= render partial: 'shared/calendar', locals: { start_date: Date.current.advance({weeks: -1}).beginning_of_week, user: @user }

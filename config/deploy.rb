@@ -5,7 +5,7 @@ require 'bundler/capistrano'
 set :application, "xrono.isotope11.com"
 role :web, "xrono.isotope11.com"
 role :app, "xrono.isotope11.com"
-role :db, "xrono.isotope11.com", :primary => true
+role :db, "xrono.isotope11.com", primary: true
 
 # server details
 default_run_options[:pty] = true
@@ -28,21 +28,21 @@ depend :remote, :gem, "bundler", "1.0.21"
 namespace :deploy do
   before 'deploy:setup', :db
 
-  task :start, :roles => :app do
+  task :start, roles: :app do
     run "touch #{current_path}/tmp/restart.txt"
   end
 
-  task :stop, :roles => :app do
+  task :stop, roles: :app do
     # Do nothing.
   end
 
   desc "Restart Application"
-  task :restart, :roles => :app do
+  task :restart, roles: :app do
     run "touch #{current_path}/tmp/restart.txt"
   end
 
   desc "Symlink shared resources on each release"
-  task :symlink_shared, :roles => :app do
+  task :symlink_shared, roles: :app do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
     run "ln -nfs #{shared_path}/config/initializers/gmail.rb #{release_path}/config/initializers/gmail.rb"
   end

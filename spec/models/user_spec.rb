@@ -3,9 +3,9 @@ require 'spec_helper'
 describe User do
   let(:user) { User.make }
   let(:user2) { User.make }
-  let(:work_unit1) { WorkUnit.make(:user => user) }
-  let(:work_unit2) { WorkUnit.make(:user => user) }
-  let(:work_unit3) { WorkUnit.make(:user => user) }
+  let(:work_unit1) { WorkUnit.make(user: user) }
+  let(:work_unit2) { WorkUnit.make(user: user) }
+  let(:work_unit3) { WorkUnit.make(user: user) }
 
   it { should validate_presence_of :first_name }
   it { should validate_presence_of :last_name }
@@ -13,8 +13,8 @@ describe User do
     subject { User.with_unpaid_work_units }
 
     before do
-      work_unit1.update_attributes(:paid => nil, :paid_at => nil)
-      work_unit2.update_attributes(:paid => nil, :paid_at => nil)
+      work_unit1.update_attributes(paid: nil, paid_at: nil)
+      work_unit2.update_attributes(paid: nil, paid_at: nil)
     end
 
     it 'should return a collection of users who have unpaid work units' do
@@ -48,7 +48,7 @@ describe User do
   describe '#initials' do
     subject { user.initials }
 
-    before { user.update_attributes(:first_name => 'Aaron', :middle_initial => 'B', :last_name => 'Crenshaw') }
+    before { user.update_attributes(first_name: 'Aaron', middle_initial: 'B', last_name: 'Crenshaw') }
 
     it 'should return the initials of the user' do
       should == 'ABC'
@@ -58,8 +58,8 @@ describe User do
   describe '#work_units_for_day' do
 
     before do
-      work_unit1.update_attributes(:scheduled_at => Time.now)
-      work_unit2.update_attributes(:scheduled_at => 1.days.ago)
+      work_unit1.update_attributes(scheduled_at: Time.now)
+      work_unit2.update_attributes(scheduled_at: 1.days.ago)
     end
 
     it 'should return a collection of work units for the user scheduled on a given day' do
@@ -67,8 +67,8 @@ describe User do
     end
 
     it "should sum up all work units' hours  for the user scheduled on a given day" do
-      work_unit1.update_attributes(:hours => 3)
-      work_unit2.update_attributes(:hours => 1, :scheduled_at => Time.now)
+      work_unit1.update_attributes(hours: 3)
+      work_unit2.update_attributes(hours: 1, scheduled_at: Time.now)
       user.hours_entered_for_day(Time.now).should == 4
     end
   end
@@ -77,8 +77,8 @@ describe User do
     subject { user.clients_for_day(Time.now) }
 
     before do
-      work_unit1.update_attributes(:scheduled_at => Time.now)
-      work_unit2.update_attributes(:scheduled_at => Time.now - 1.day)
+      work_unit1.update_attributes(scheduled_at: Time.now)
+      work_unit2.update_attributes(scheduled_at: Time.now - 1.day)
     end
 
     context 'when the user has work units scheduled for a given day' do
@@ -92,8 +92,8 @@ describe User do
     subject { user.work_units_for_week(Time.now) }
 
     before do
-      work_unit1.update_attributes(:scheduled_at => Time.now)
-      work_unit2.update_attributes(:scheduled_at => Time.now - 1.week)
+      work_unit1.update_attributes(scheduled_at: Time.now)
+      work_unit2.update_attributes(scheduled_at: Time.now - 1.week)
     end
 
     it 'should return a collection of work units for the user scheduled during the week of a given day' do
@@ -105,9 +105,9 @@ describe User do
     subject { user.unpaid_work_units }
 
     before do
-      work_unit1.update_attributes(:paid => nil, :paid_at => nil)
-      work_unit2.update_attributes(:paid => 'True', :paid_at => Time.now)
-      work_unit3.update_attributes(:user => user2)
+      work_unit1.update_attributes(paid: nil, paid_at: nil)
+      work_unit2.update_attributes(paid: 'True', paid_at: Time.now)
+      work_unit3.update_attributes(user: user2)
     end
 
     it 'should return a collection of work units which are unpaid and belong to the user' do
@@ -118,7 +118,7 @@ describe User do
   describe '#to_s' do
     subject { user.to_s }
 
-    before { user.update_attributes(:first_name => 'Aaron', :middle_initial => 'B', :last_name => 'Crenshaw') }
+    before { user.update_attributes(first_name: 'Aaron', middle_initial: 'B', last_name: 'Crenshaw') }
 
     it 'should return the first name, middle initial, and last name for the user' do
       should == 'Aaron B Crenshaw'
@@ -159,10 +159,10 @@ describe User do
     let(:site_settings) { SiteSettings.make }
 
     before do
-      site_settings.update_attributes(:total_yearly_pto_per_user => 40)
-      work_unit1.update_attributes(:hours => 2, :hours_type => 'PTO', :scheduled_at => '2011-01-01')
-      work_unit2.update_attributes(:hours => 3, :hours_type => 'PTO', :scheduled_at => '2011-12-30')
-      work_unit3.update_attributes(:hours => 5, :hours_type => 'PTO', :scheduled_at => '2010-12-31')
+      site_settings.update_attributes(total_yearly_pto_per_user: 40)
+      work_unit1.update_attributes(hours: 2, hours_type: 'PTO', scheduled_at: '2011-01-01')
+      work_unit2.update_attributes(hours: 3, hours_type: 'PTO', scheduled_at: '2011-12-30')
+      work_unit3.update_attributes(hours: 5, hours_type: 'PTO', scheduled_at: '2010-12-31')
     end
 
     it 'should return the number of PTO hours left for the given year as of the passed date' do
@@ -194,7 +194,7 @@ describe User do
     subject { user.expected_hours(Date.current).to_s }
 
     before do
-      work_unit1.update_attributes(:hours => 2, :hours_type => 'Normal', :scheduled_at => Date.yesterday)
+      work_unit1.update_attributes(hours: 2, hours_type: 'Normal', scheduled_at: Date.yesterday)
     end
 
     it 'should raise an error if not passed a date' do
@@ -209,7 +209,7 @@ describe User do
 
     context 'user has been here all year' do
       before do
-        work_unit1.update_attributes(:hours => 2, :hours_type => 'Normal', :scheduled_at => Date.current.years_ago(1))
+        work_unit1.update_attributes(hours: 2, hours_type: 'Normal', scheduled_at: Date.current.years_ago(1))
       end
       it { should =~ /\d+/}
     end

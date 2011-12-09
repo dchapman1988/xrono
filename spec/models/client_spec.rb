@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe Client do
   let(:user) { User.make }
-  let(:client) { Client.make(:name => 'New Client', :status => 'Active') }
-  let(:project) { Project.make(:client => client)  }
-  let(:ticket)  { Ticket.make(:project => project) }
-  let(:work_unit1) { WorkUnit.make(:ticket => ticket) }
-  let(:work_unit2) { WorkUnit.make(:ticket => ticket) }
-  let(:work_unit3) { WorkUnit.make(:ticket => ticket) }
+  let(:client) { Client.make(name: 'New Client', status: 'Active') }
+  let(:project) { Project.make(client: client)  }
+  let(:ticket)  { Ticket.make(project: project) }
+  let(:work_unit1) { WorkUnit.make(ticket: ticket) }
+  let(:work_unit2) { WorkUnit.make(ticket: ticket) }
+  let(:work_unit3) { WorkUnit.make(ticket: ticket) }
 
   subject { client }
 
@@ -47,9 +47,9 @@ describe Client do
 
     context 'when there are invoiced and uninvoiced work units' do
       before do
-        work_unit1.update_attributes(:hours => 1, :hours_type => 'Normal')
-        work_unit2.update_attributes(:hours => 1, :hours_type => 'Normal')
-        work_unit3.update_attributes(:hours => 1, :hours_type => 'Normal', :invoiced => '1', :invoiced_at => Date.current)
+        work_unit1.update_attributes(hours: 1, hours_type: 'Normal')
+        work_unit2.update_attributes(hours: 1, hours_type: 'Normal')
+        work_unit3.update_attributes(hours: 1, hours_type: 'Normal', invoiced: '1', invoiced_at: Date.current)
       end
 
       it 'returns the sum of the hours on the uninvoiced work units' do
@@ -63,8 +63,8 @@ describe Client do
 
     context 'when there are normal work units with hours' do
       before do
-        work_unit1.update_attributes(:hours => 1, :hours_type => 'Normal')
-        work_unit2.update_attributes(:hours => 1, :hours_type => 'Normal')
+        work_unit1.update_attributes(hours: 1, hours_type: 'Normal')
+        work_unit2.update_attributes(hours: 1, hours_type: 'Normal')
       end
 
       it 'should return the correct sum of hours for those work units' do
@@ -77,7 +77,7 @@ describe Client do
     subject { client.tickets }
 
     context 'when the client has tickets' do
-      let(:ticket2) { Ticket.make(:project => project) }
+      let(:ticket2) { Ticket.make(project: project) }
 
       it 'returns the collection of tickets that belong to the client' do
         should == [ticket, ticket2]
@@ -137,8 +137,8 @@ describe Client do
 
   describe 'file_and_comments' do
     before do
-      @file_attachment = FileAttachment.create! :client_id => client.id, :ticket_id => ticket.id, :project_id => project.id, :attachment_file_file_name => "file.file", :created_at => 2.days.ago
-      @comment = Comment.create! :title => "Test", :comment => "Herro", :commentable_id => client.id, :created_at => 1.hours.ago, :commentable_type => "Client"
+      @file_attachment = FileAttachment.create! client_id: client.id, ticket_id: ticket.id, project_id: project.id, attachment_file_file_name: "file.file", created_at: 2.days.ago
+      @comment = Comment.create! title: "Test", comment: "Herro", commentable_id: client.id, created_at: 1.hours.ago, commentable_type: "Client"
     end
 
     it 'should add file attachments and comments in the correct order' do

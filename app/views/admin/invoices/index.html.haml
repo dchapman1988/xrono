@@ -1,6 +1,6 @@
 %h2= t(:invoice_report)
 
-= render :partial => 'admin/nav'
+= render partial: 'admin/nav'
 
 %h3= "#{t(:clients_with_uninvoiced_work_units)}:"
 %table.zebra-striped
@@ -13,7 +13,7 @@
     %th= @work_units.count
     %th= @work_units.sum(:effective_hours)
   - @clients.each do |client|
-    %tr{ :class => cycle("odd", "even") }
+    %tr{ class: cycle("odd", "even") }
       %td= link_to client, admin_invoice_path(client)
       %td= @work_units.for_client(client).count
       %td= @work_units.for_client(client).sum(:effective_hours)

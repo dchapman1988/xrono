@@ -6,9 +6,9 @@
 
 %h2= t(:all_users)
 
-= render :partial => 'admin/nav'
+= render partial: 'admin/nav'
 
-= link_to t(:new_user), new_admin_user_path, :class => "add_new_button btn primary"
+= link_to t(:new_user), new_admin_user_path, class: "add_new_button btn primary"
 
 #accordion
   - unless @users[:unlocked].empty?
@@ -27,7 +27,7 @@
             %th= t(:pto_left)
         %tbody
           - @users[:unlocked].each do |user|
-            %tr{ :class => cycle("odd", "even") }
+            %tr{ class: cycle("odd", "even") }
               %td.user_img
                 = link_to "#{show_gravatar_for(user)}".html_safe,
                   user_path(user)
@@ -60,7 +60,7 @@
             %th= t(:pto_left)
         %tbody
           - @users[:locked].each do |user|
-            %tr{ :class => cycle("odd", "even") }
+            %tr{ class: cycle("odd", "even") }
               %td.user_img
                 = link_to "#{show_gravatar_for(user)}".html_safe,
                   user_path(user)

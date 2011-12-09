@@ -2,15 +2,15 @@
   %head
     %title= yield(:title) + t(:app_name)
     %meta{"content" => "text/html;charset=UTF-8", "http-equiv" => "content-type"}
-    %link{:rel => "shortcut icon", :href => "/favicon.ico"}
-    = stylesheet_link_tag 'screen.css', :media => 'screen, projection'
+    %link{rel: "shortcut icon", href: "/favicon.ico"}
+    = stylesheet_link_tag 'screen.css', media: 'screen, projection'
     = csrf_meta_tag
     = yield :head
   %body
     .topbar
       .fill
         .container
-          = link_to image_tag(@site_settings.site_logo.url), '/', :class => 'brand'
+          = link_to image_tag(@site_settings.site_logo.url), '/', class: 'brand'
           = render partial: "shared/menu"
     .container
       = render partial: "shared/flashes"

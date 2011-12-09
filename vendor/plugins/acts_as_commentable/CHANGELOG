@@ -4,7 +4,7 @@
     to the generated Comment model. This will help with the current bug in Rails
     that prevents people from overriding this. Now they can just delete from the model,
     set it differently, etc. 
-* revision 8: Changed has_many :dependent => true to :dependent => :destroy for Rails 1.2.2
+* revision 8: Changed has_many dependent: true to dependent: :destroy for Rails 1.2.2
                  + Thanks Josh Martin
               Added an order clause in the has_many relationship.
               Made comment column type to text from string in migration example in README

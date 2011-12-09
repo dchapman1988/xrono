@@ -31,7 +31,7 @@ module NavigationHelpers
       '/admin/invoices'
 
     when /^the admin #{capture_model}(?:'s)? (.+?) page$/
-      path_to_pickle 'admin', $1, :extra => $2
+      path_to_pickle 'admin', $1, extra: $2
 
     when /^the admin payroll show page for #{capture_model}$/
       user = model!($1)
@@ -53,16 +53,16 @@ module NavigationHelpers
       path_to_pickle $1, $2, $3, $4
 
     when /^#{capture_model}(?:'s)? #{capture_model}'s #{capture_model}(?:'s)? #{capture_model}(?:'s)? (.+?) page$/  # eg. the forum's category's post's comment's moderations page
-      path_to_pickle $1, $2, $3, $4, :extra => $5                           #  or the forum's post's comment's moderation's edit page
+      path_to_pickle $1, $2, $3, $4, extra: $5                           #  or the forum's post's comment's moderation's edit page
 
     when /^#{capture_model}(?:'s)? #{capture_model}'s #{capture_model}(?:'s)? (.+?) page$/  # eg. the forum's category's post's comments page
-      path_to_pickle $1, $2, $3, :extra => $4                           #  or the forum's category's post's edit page
+      path_to_pickle $1, $2, $3, extra: $4                           #  or the forum's category's post's edit page
 
     when /^#{capture_model}(?:'s)? #{capture_model}'s (.+?) page$/  # eg. the forum's post's comments page
-      path_to_pickle $1, $2, :extra => $3                           #  or the forum's post's edit page
+      path_to_pickle $1, $2, extra: $3                           #  or the forum's post's edit page
 
     when /^#{capture_model}(?:'s)? (.+?) page$/                     # eg. the forum's posts page
-      path_to_pickle $1, :extra => $2                               #  or the forum's edit page
+      path_to_pickle $1, extra: $2                               #  or the forum's edit page
 
 
     # Add more mappings here.

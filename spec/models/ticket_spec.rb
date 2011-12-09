@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Ticket do
-  before { @ticket = Ticket.make(:name => 'New Ticket') }
+  before { @ticket = Ticket.make(name: 'New Ticket') }
 
   it { should belong_to :project }
   it { should have_many :work_units }
@@ -31,11 +31,11 @@ describe Ticket do
     context 'when there are unpaid work units on a ticket' do
       it 'totals the unpaid hours for that ticket' do
         ticket = Ticket.make
-        work_unit_1 = WorkUnit.make(:ticket => ticket)
-        work_unit_2 = WorkUnit.make(:ticket => ticket)
+        work_unit_1 = WorkUnit.make(ticket: ticket)
+        work_unit_2 = WorkUnit.make(ticket: ticket)
         work_unit_3 = WorkUnit.make(
-          :ticket => ticket,
-          :paid => 'paid on 2010-10-25')
+          ticket: ticket,
+          paid: 'paid on 2010-10-25')
         unpaid_hours = work_unit_1.effective_hours + work_unit_2.effective_hours
         ticket.unpaid_hours.should == unpaid_hours
       end
@@ -46,11 +46,11 @@ describe Ticket do
     context 'when there are uninvoiced work units on a ticket' do
       it 'returns the total number of uninvoiced work units for that ticket' do
         ticket = Ticket.make
-        work_unit_1 = WorkUnit.make(:ticket => ticket)
-        work_unit_2 = WorkUnit.make(:ticket => ticket)
+        work_unit_1 = WorkUnit.make(ticket: ticket)
+        work_unit_2 = WorkUnit.make(ticket: ticket)
         work_unit_3 = WorkUnit.make(
-          :ticket => ticket,
-          :invoiced => 'invoiced on 2010-10-25' )
+          ticket: ticket,
+          invoiced: 'invoiced on 2010-10-25' )
         uninvoiced_hours = work_unit_1.effective_hours + work_unit_2.effective_hours
         ticket.uninvoiced_hours.should == uninvoiced_hours
       end
@@ -71,7 +71,7 @@ describe Ticket do
   describe '#allows_access?' do
     before(:each) do
       @project = Project.make
-      @ticket = Ticket.make(:project => @project)
+      @ticket = Ticket.make(project: @project)
       @user = User.make
     end
 
@@ -92,9 +92,9 @@ describe Ticket do
         project1 = Project.make
         user.has_role!(:developer, project1)
         project2 = Project.make
-        ticket1 = Ticket.make(:project => project1)
-        ticket2 = Ticket.make(:project => project1)
-        ticket3 = Ticket.make(:project => project2)
+        ticket1 = Ticket.make(project: project1)
+        ticket2 = Ticket.make(project: project1)
+        ticket3 = Ticket.make(project: project2)
         Ticket.for_user(user).include?(ticket1).should be_true
         Ticket.for_user(user).include?(ticket2).should be_true
         Ticket.for_user(user).include?(ticket3).should be_false
@@ -107,9 +107,9 @@ describe Ticket do
       it 'should return the correct sum of hours for those work units' do
         ticket1 = Ticket.make
         ticket2 = Ticket.make
-        work_unit1 = WorkUnit.make(:ticket => ticket1, :hours => '1.0', :hours_type => 'Normal')
-        work_unit2 = WorkUnit.make(:ticket => ticket1, :hours => '1.0', :hours_type => 'Normal')
-        work_unit3 = WorkUnit.make(:ticket => ticket2, :hours => '1.0', :hours_type => 'Normal')
+        work_unit1 = WorkUnit.make(ticket: ticket1, hours: '1.0', hours_type: 'Normal')
+        work_unit2 = WorkUnit.make(ticket: ticket1, hours: '1.0', hours_type: 'Normal')
+        work_unit3 = WorkUnit.make(ticket: ticket2, hours: '1.0', hours_type: 'Normal')
         ticket1.hours.should == 2.0
       end
     end

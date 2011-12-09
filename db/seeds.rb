@@ -3,8 +3,8 @@
 #
 # Examples:
 #
-#   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
-#   Mayor.create(:name => 'Daley', :city => cities.first)
+#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
+#   Mayor.create(name: 'Daley', city: cities.first)
 
 unless Rails.env.production?
 
@@ -36,10 +36,10 @@ unless Rails.env.production?
 
   # Users #
 
-  admin_user     = User.make :email => 'admin@xrono.org'
-  developer_user = User.make :email => 'dev@xrono.org'
-  locked_user    = User.make :email => 'locked@xrono.org'
-  client_user    = User.make :email => 'client@xrono.org'
+  admin_user     = User.make email: 'admin@xrono.org'
+  developer_user = User.make email: 'dev@xrono.org'
+  locked_user    = User.make email: 'locked@xrono.org'
+  client_user    = User.make email: 'client@xrono.org'
 
   developers = [ admin_user, developer_user ]
   8.times { developers.push User.make }

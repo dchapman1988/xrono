@@ -1,5 +1,5 @@
 #files
   %h3= t(:files)
-  = link_to "Hide/Show invalid", "#files", :id => 'hide_show_invalid'
+  = link_to "Hide/Show invalid", "#files", id: 'hide_show_invalid'
   %ul
-    = render :partial => "file_attachments/file_attachment", :collection => file_attachments
+    = render partial: "file_attachments/file_attachment", collection: file_attachments

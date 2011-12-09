@@ -5,8 +5,8 @@
         .comment_details
           = show_gravatar_for(comment.user)
           %p
-          = form_for comment, :url => {:controller => 'comments', :action => "update", :id => comment.id} do |c|
-            = c.submit "Hide Comment", :class => 'btn'
+          = form_for comment, url: {controller: 'comments', action: "update", id: comment.id} do |c|
+            = c.submit "Hide Comment", class: 'btn'
       .span4
         .comment_real_body
           = " #{comment.user.first_name} #{comment.user.last_name} commented"
@@ -19,28 +19,28 @@
           %pre= comment.comment
       .span2
         - if comment.user == current_user
-          = button_to "Delete", comment, :method => :delete, :confirm => "Are you sure?"
+          = button_to "Delete", comment, method: :delete, confirm: "Are you sure?"
 
 - else 
   .row
     .span2
-      .comment_real_body.hidden_comment{ :style => 'display: none;' }
+      .comment_real_body.hidden_comment{ style: 'display: none;' }
         .comment_details
           = show_gravatar_for(comment.user)
       .comment_real_body
         .comment_details
-          = form_for comment, :url => {:controller => 'comments', :action => "update", :id => comment.id} do |c|
-            = c.submit "Unhide Comment", :class => 'btn'
+          = form_for comment, url: {controller: 'comments', action: "update", id: comment.id} do |c|
+            = c.submit "Unhide Comment", class: 'btn'
           %p
     .span4
-      .comment_real_body.hidden_comment{ :style => 'display: none;' }
+      .comment_real_body.hidden_comment{ style: 'display: none;' }
         = " #{comment.user.first_name} #{comment.user.last_name} commented"
         %p
         = " #{distance_of_time_in_words_to_now(comment.created_at)} ago:"
         %p
         = "#{t(:posted)}: #{comment.created_at.strftime("%m-%d-%y")} at #{comment.created_at.strftime("%I:%M %p")}"
     .span8
-      .comment_real_body.hidden_comment{ :style => 'display: none;' }
+      .comment_real_body.hidden_comment{ style: 'display: none;' }
         .comment_body
           %pre= comment.comment
     .span2

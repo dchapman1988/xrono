@@ -4,10 +4,10 @@ class CreateAddresses < ActiveRecord::Migration
       t.string :address1
       t.string :address2
       t.string :city
-      t.string :state, :limit => 2
+      t.string :state, limit: 2
       t.string :zipcode
 
-      t.references :addressable, :polymorphic => true
+      t.references :addressable, polymorphic: true
 
       t.timestamps
     end

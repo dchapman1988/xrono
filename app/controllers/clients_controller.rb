@@ -1,7 +1,7 @@
 class ClientsController < ApplicationController
-  before_filter :load_new_client, :only => [:new, :create]
-  before_filter :load_client, :only => [:edit, :show, :update]
-  before_filter :load_file_attachments, :only => [:show, :new, :create]
+  before_filter :load_new_client, only: [:new, :create]
+  before_filter :load_client, only: [:edit, :show, :update]
+  before_filter :load_file_attachments, only: [:show, :new, :create]
 
   access_control do
     allow :admin
@@ -12,8 +12,8 @@ class ClientsController < ApplicationController
     end
 
     action :show do
-      allow :developer, :if => :user_is_authorized
-      allow :client, :if => :user_is_authorized
+      allow :developer, if: :user_is_authorized
+      allow :client, if: :user_is_authorized
     end
   end
 
@@ -56,7 +56,7 @@ class ClientsController < ApplicationController
       redirect_to @client
     else
       flash.now[:error] = t(:client_created_unsuccessfully)
-      render :action => 'new'
+      render action: 'new'
     end
   end
 
@@ -66,7 +66,7 @@ class ClientsController < ApplicationController
       redirect_to @client
     else
       flash.now[:error] = t(:client_updated_unsuccessfully)
-      render :action => 'edit'
+      render action: 'edit'
     end
   end
 

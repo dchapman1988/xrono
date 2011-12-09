@@ -5,16 +5,16 @@ class Project < ActiveRecord::Base
 
   belongs_to :client
   has_many :tickets
-  has_many :comments, :as => :commentable
+  has_many :comments, as: :commentable
   has_many :file_attachments
 
   validates_presence_of :name
   validates_presence_of :client_id
-  validates_uniqueness_of :name, :scope => :client_id
+  validates_uniqueness_of :name, scope: :client_id
 
   scope :sort_by_name, order('name ASC')
-  scope :for_client,    lambda {|client|    where :client_id => client.id }
-  scope :for_client_id, lambda {|client_id| where :client_id => client_id }
+  scope :for_client,    lambda {|client|    where client_id: client.id }
+  scope :for_client_id, lambda {|client_id| where client_id: client_id }
 
   scope :for_user, lambda{|user|
     joins("INNER JOIN roles        r ON r.authorizable_type='#{model_name}' AND r.authorizable_id=projects.id")

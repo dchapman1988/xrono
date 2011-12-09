@@ -1,12 +1,12 @@
 class ProjectsController < ApplicationController
-  before_filter :load_new_project, :only => [:new, :create]
-  before_filter :load_project, :only => [:show, :edit, :update]
-  before_filter :load_file_attachments, :only => [:show, :new, :create]
+  before_filter :load_new_project, only: [:new, :create]
+  before_filter :load_project, only: [:show, :edit, :update]
+  before_filter :load_file_attachments, only: [:show, :new, :create]
 
   access_control do
     allow :admin
-    allow :developer, :of => :project
-    allow :client, :of => :project, :to => [:show]
+    allow :developer, of: :project
+    allow :client, of: :project, to: [:show]
   end
 
   # GET /projects/new
@@ -20,7 +20,7 @@ class ProjectsController < ApplicationController
       redirect_to @project
     else
       flash.now[:error] = t(:project_created_unsuccessfully)
-      render :action => 'new'
+      render action: 'new'
     end
   end
 
@@ -42,7 +42,7 @@ class ProjectsController < ApplicationController
       redirect_to [@project]
     else
       flash.now[:error] = t(:project_updated_unsuccessfully)
-      render :action => 'edit'
+      render action: 'edit'
     end
   end
 
