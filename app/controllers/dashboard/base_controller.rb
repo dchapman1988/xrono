@@ -67,6 +67,11 @@ class Dashboard::BaseController < ApplicationController
     end
   end
 
+  def reports
+    @search = Project.search params[:search]
+    @projects = @search.all
+  end
+
   private
 
   def decide_bucket

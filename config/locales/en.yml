@@ -62,6 +62,7 @@ en:
   clients: "Clients"
   users: "Users"
   admin: "Admin"
+  reports: "Reports"
   cancel: "Cancel"
   change_password: "Change Password"
   password: "Password"

@@ -8,6 +8,10 @@ class ProjectsController < ApplicationController
 
   authorize_owners_with_client_show(:project)
 
+  def index
+    @projects = Project.all
+  end
+
   # GET /projects/new
   def new
   end

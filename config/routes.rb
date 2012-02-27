@@ -92,6 +92,7 @@ AssetTrackerTutorial::Application.routes.draw do
   get '/dashboard/project', :controller => "dashboard/base", :action => "project"
   get '/dashboard/recent_work', :controller => "dashboard/base", :action => "recent_work"
   get '/dashboard/update_calendar', :controller => "dashboard/base", :action => "update_calendar"
+  get '/dashboard/reports', :controller => "dashboard/base", :action => "reports", :as => "reports"
   post '/file_attachments/mark_as_invalid', :controller => "file_attachments", :action => "mark_as_invalid"
 
   namespace :api do

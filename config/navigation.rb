@@ -53,6 +53,7 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :clients, t(:clients), clients_path, :unless => lambda { client? }
     primary.item :admin_users, t(:users), admin_users_path, :if => lambda{ admin? }, :highlights_on => lambda{ false }
     primary.item :reports, "Reports", client_login_reports_path, :if => lambda {client?}
+    primary.item :reports, "Reports", reports_path, :unless => lambda {client?}
     primary.item :admin, t(:admin), admin_path, :if => lambda{ admin? }, :highlights_on => /admin/
     primary.item :users, t(:users), users_path, :unless => lambda{ admin? || client? }
 
