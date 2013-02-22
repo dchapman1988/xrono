@@ -58,6 +58,7 @@ group :test do
   gem 'simplecov-rcov'
   gem 'spork', '0.9.0.rc9'
   gem 'ci_reporter'
+  gem 'poltergeist', '~> 1.0.0'
 end
 
 platforms :jruby do
