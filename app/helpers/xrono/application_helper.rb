@@ -1,5 +1,6 @@
-module ApplicationHelper
-  include Acl9Helpers
+require 'acl9'
+module Xrono::ApplicationHelper
+  include ::Acl9::Helpers
 
   def bootstrap_icon(name)
     content_tag('i', nil, :class => "icon-#{name}")

@@ -1,7 +1,8 @@
-class ApplicationController < ActionController::Base
+class Xrono::ApplicationController < ActionController::Base
   include RefurlHelper
-  protect_from_forgery
+  helper Xrono.helpers
   layout 'application'
+  protect_from_forgery
 
   before_filter :initialize_site_settings
   before_filter :redirect_clients
