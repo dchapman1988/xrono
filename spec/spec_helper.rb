@@ -1,6 +1,8 @@
 # Simplecov Setup
 if RUBY_VERSION >= '1.9.2'
   require 'simplecov'
+  require 'simplecov-rcov'
+  SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
   SimpleCov.start 'rails' do
     add_filter '/vendor/'
   end
@@ -30,17 +32,7 @@ DatabaseCleaner.strategy = :truncation
 DatabaseCleaner.clean
 
 RSpec.configure do |config|
-<<<<<<< HEAD
-  # == Mock Framework
-  #
-  # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
-  #
-  # config.mock_with :mocha
-  # config.mock_with :flexmock
-  # config.mock_with :rr
-=======
   config.mock_with :rspec
->>>>>>> isotope11/master
   config.include Devise::TestHelpers, :type => :controller
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
